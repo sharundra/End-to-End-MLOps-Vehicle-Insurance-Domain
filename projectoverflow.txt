@@ -1,0 +1,17 @@
+1. Create a repo "End-to-End-MLOps-Vehicle-Insurance-Domain" and clone it in local
+2. Create a script template.py and run it which upon running would generate project folder template.
+3. write the scripts of setup.py and pyproject.toml to import local changes.
+4. Open/create a conda venv and install requirements.txt -- "pip install requirements.txt"
+
+----------------------------------MongoDB Setup--------------------------------------
+1. Sign up to MongoDB atlas and while signing in, fill company name so that you are an organization on MongoDB.
+# At MongoDB, we have Organization, which lets us create various projects and inside projects, we create clusters.
+2. Click on "Sharad's Organization" and inside that "create a porject" choosing default options like no tags and permissions.
+3. Inside project, click on "create a cluster", choose free cluster(512 MB storage and shared RAM), keep other things default like "provider" as "aws".
+4. Now, copy the generated username and password for this cluster.
+5. Add an IP address to access it from anywhere -- 
+    a. In the left panel, go to Security --> Databasse & Network Access --> Network access --> IP access list --> Add IP address --> put "0.0.0.0/0" (this will make cluster to be accessed from anywhere).
+6. GO back to project and click on "get connection string" --> for "driver", select "python" and for "version", select "4.7 or later".
+    a. Then copy the connection string and store it somewhere, It will be used later. 
+    # Earlier copied password will be required to put in connection string to use that.
+7. 
