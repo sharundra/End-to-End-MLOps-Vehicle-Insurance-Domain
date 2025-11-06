@@ -19,4 +19,13 @@
 6. Go back to project and click on "get connection string" --> for "driver", select "python" and for "version", select "4.7 or later".
     a. Then copy the connection string and store it somewhere, It will be used later. 
     # Earlier copied password will be required to put in connection string to use that.
-7. 
+7. Create a folder "notebook" and add dataset "data.csv"
+8. Create a notebook file "mongodb_demo.ipynb" inside "notebook" folder and select currently using conda venv as kernel there.
+9. Run the script and hence use the connection string in the "mongodb_demo.ipynb" to push the data (data.csv) to our project's cluter in mongodb.
+    # After working with the data, either delete the cluster from mongodb or remove the connection string/password from the script.
+10. Check Mongodb atlas to confirm that data is pushed properly -- project --> clusters --> browse collections.
+
+-------------------------------------- logging, exception and notebooks --------------------------------------
+1. Create the logging script in src/logger/__init__.py
+2. To check if its working properly, run demo.py (only logging part). It should create a folder logs with a log file inside it.
+3. Similarily, create the exception script too in src/exception/__init__.pywhich logs the error/exception. Test it in demo.py and check the log folder. 
