@@ -29,3 +29,7 @@
 1. Create the logging script in src/logger/__init__.py
 2. To check if its working properly, run demo.py (only logging part). It should create a folder logs with a log file inside it.
 3. Similarily, create the exception script too in src/exception/__init__.pywhich logs the error/exception. Test it in demo.py and check the log folder. 
+
+
+-------------------------------------- Preprocessing experiments in notebook --------------------------------------
+1. Add script exp-notebook.ipynb in the "notebook" folder to perform EDA on the dataset.
