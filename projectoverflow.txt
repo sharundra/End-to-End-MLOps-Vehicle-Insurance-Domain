@@ -52,3 +52,8 @@ Setting and testing training pipeline:
 6. Setup MONGODB_URL_KEY in src/configuration/mongo_db_connection.py
 7. Run demo.py just to run data ingestion pipeline.
  # Add artifact folder to .gitignote
+
+ ---------------------------- Data Validation, Data Transformation & Model Trainer ----------------------------
+ 1. Prepare the script of src/utils/main_utils.py and config/schema.yaml
+ 2. Now add scripts pretty much the same way it was done for data ingestion like adding constants, config_entity, artifact_entity, components, pipeline.
+ 3. Run demo.py to confirm both data ingestion and data validation are working fine.
