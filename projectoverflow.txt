@@ -33,3 +33,22 @@
 
 -------------------------------------- Preprocessing experiments in notebook --------------------------------------
 1. Add script exp-notebook.ipynb in the "notebook" folder to perform EDA on the dataset.
+
+----------------------------------------------- Data Ingestion ----------------------------------------------------
+Adding constants:
+1. Add constant variables in src/constants.__init__.py
+
+Accessing MongoDB database through configuration and data_access:
+2. Add script src/configuration/mongo_db_connection.py to connect to mongodb database.
+3. Add script src/data_access/proj1_data.py to import data from MongoDB as a pandas dataframe using the connection establishement script of src/configuration/mongo_db_connection.py.
+
+Doing data ingestion through entity and components:
+4. Add path related configurations of Data Ingestion into src/entity/config_entity.py.
+    a. Add DataIngestionArtifact class to src/entity/artifact_entity.py which would have artifact storing paths (train_file_path and test_file_path). 
+    b. Add script to src/components/data_ingestion.py which would access the dataframe ans store it at feature_store path. Also, it will do train_test_split of the data and store them separately at train_file_path and test_file_path.
+
+Setting and testing training pipeline:
+5. Inside src/pipeline/training_pipeline.py, setup only data ingestion part.
+6. Setup MONGODB_URL_KEY in src/configuration/mongo_db_connection.py
+7. Run demo.py just to run data ingestion pipeline.
+ # Add artifact folder to .gitignote
