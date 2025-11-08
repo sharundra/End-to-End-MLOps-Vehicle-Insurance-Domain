@@ -57,3 +57,4 @@ Setting and testing training pipeline:
  1. Prepare the script of src/utils/main_utils.py and config/schema.yaml
  2. Now add scripts pretty much the same way it was done for data ingestion like adding constants, config_entity, artifact_entity, components, pipeline.
  3. Run demo.py to confirm both data ingestion and data validation are working fine.
+ 4. Repeat step 2 and 3 for Data Transformation. 
