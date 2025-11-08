@@ -58,3 +58,4 @@ Setting and testing training pipeline:
  2. Now add scripts pretty much the same way it was done for data ingestion like adding constants, config_entity, artifact_entity, components, pipeline.
  3. Run demo.py to confirm both data ingestion and data validation are working fine.
  4. Repeat step 2 and 3 for Data Transformation. 
+ 5. Repeat step 2 and 3 for Model Trainer (Add src/entity/estimator.py also which would primarily be used in Model Evaluation but here this class is intialized with trained model and saved for later use). 
