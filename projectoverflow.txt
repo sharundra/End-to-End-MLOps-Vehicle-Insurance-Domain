@@ -58,4 +58,35 @@ Setting and testing training pipeline:
  2. Now add scripts pretty much the same way it was done for data ingestion like adding constants, config_entity, artifact_entity, components, pipeline.
  3. Run demo.py to confirm both data ingestion and data validation are working fine.
  4. Repeat step 2 and 3 for Data Transformation. 
- 5. Repeat step 2 and 3 for Model Trainer (Add src/entity/estimator.py also which would primarily be used in Model Evaluation but here this class is intialized with trained model and saved for later use). 
+ 5. Repeat step 2 and 3 for Model Trainer (Add src/entity/estimator.py also which would primarily be used in Model Evaluation but here this class is intialized with trained model and saved for later use).
+
+------------------------------------------ AWS Services Setup --------------------------------------------------
+1. Login to AWS consol (prefer via root user) and keep region as "us-east-1".
+2. Create a new user (name -- firstproj) in IAM. GO to IAM --> "users" (in the left sidebar) --> "create user" : enter the name of user, ie.. firstproj, then click next (DONT select "user access to management consol") --> "attach policies directly" 
+ # For the policy, select "AdministratorAccess" (it means user has access to all services), click next --> "create user"
+3. Create access key (for authentication whenever AWS services will be used): "users" --> "security credentials" --> "access keys" --> "create access key" --> "CLI" --> "confirmation" --> "create access key".
+ # Copy the access key and secret password. We can download the .csv file also.
+4. Set AWS credentials as env variables in terminal:
+    # for bash or zsh terminal -- export AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID" export AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
+    # for powershell -- $env:AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID" $env:AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
+    a. Check if they are set properly -- 
+    # for bash/zsh -- echo $AWS_ACCESS_KEY_ID      and       echo $AWS_SECRET_ACCESS_KEY
+    # for powershell -- echo $env:AWS_ACCESS_KEY_ID      and       echo $env:AWS_SECRET_ACCESS_KEY
+5. Add these AWS keys (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY) and REGION_NAME = "us-east-1" in src.constants/__init__.py
+6. Add script to src/configuration/aws_connection.py to establish connection with S3 bucket using AWS credentials. 
+    # It uses boto3 library which is AWS' official SDK for python to programmatically interact wit AWS services. 
+7. Ensure that the below keys are set in constants/__init__.py :
+            MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
+            MODEL_BUCKET_NAME = "<unique-bucket-name>"
+            MODEL_PUSHER_S3_KEY = "model-registry"
+8. Create S3 bucket on AWS: search S3 --> "create bucket" --> ensure region is "us-eat-1", select "General purpose", give a unique bucket name <unique-bucket-name>, uncheck the box which says "block all public access" (for sensitive work this would remain checked), acknowledge your unchecking then go down and click on "create bucket".
+9. Now add code inside src/cloud_storage/aws_storage.py. 
+ # This script provides methods to interact with AWS S3 storage, file management, data uploads, and data retrieval in S3 buckets.
+10. Add code to src/entity/s3_estimator.py
+    # It uses functions from aws_connection.py and aws_storage.py to save and retrieve model from S3 bucket and do prediction.
+
+
+------------------------------------------ Model Evaluation and Model Pusher --------------------------------------------------
+ 1. Add scripts for evaluation and pushing the model (to AWS) in the similar fashion as done previously i.e. constants, entity, components and pipeline
+ 2. Run demo.py
+ # Check S3 bucket if model is pushed there or not (happens only when new trained model is better than already pushed model).
