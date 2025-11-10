@@ -90,3 +90,10 @@ Setting and testing training pipeline:
  1. Add scripts for evaluation and pushing the model (to AWS) in the similar fashion as done previously i.e. constants, entity, components and pipeline
  2. Run demo.py
  # Check S3 bucket if model is pushed there or not (happens only when new trained model is better than already pushed model).
+
+ ------------------------------------------ Making an Application --------------------------------------------------
+ 1. Create script for src/pipeline/prediction_pipeline.py
+ 2. Add VehiclePredictorConfig in src/entity/config_entity.py
+ 3. Create script for /app.py
+ 4. Create scripts for static/css/style.css and templates/vehicledata.html
+ 5. Run app.py and check the app at localhost:5000
