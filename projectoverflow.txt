@@ -97,3 +97,4 @@ Setting and testing training pipeline:
  3. Create script for /app.py
  4. Create scripts for static/css/style.css and templates/vehicledata.html
  5. Run app.py and check the app at localhost:5000
+ # We can train the model also through app by just clicking "train the model" button on the app.
