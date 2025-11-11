@@ -144,3 +144,9 @@ Setting and testing training pipeline:
 11. Now after a minute, go back to EC2 --> instances(running) --> click on instance id --> copy 'public IPv4 address'
 12. Now paste the public ip address on the address bar +:5000 and our app will be launched.
 
+13. Stopping the AWS services:
+    a. EC2 --> select the instance --> in "instance state", select "stop the instance" then in "instance state itself", select "terminate the instance".
+    b. Go to IAM --> "users" --> select the user --> click on "delete" (it will ask for deactivating access key, put it and then delete).
+    c. Go to ECR --> go inside repo --> select the image, delete it. COme back to repo, select it and delete it.
+    d. Go to S3 --> go inside our created bucket --> select and delete the model.pkl. Come outside and ten select and delete the created bucket.
+    e. GO back to all services just once to confirm that everything is deleted.
