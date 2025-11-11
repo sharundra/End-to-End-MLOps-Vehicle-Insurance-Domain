@@ -98,3 +98,44 @@ Setting and testing training pipeline:
  4. Create scripts for static/css/style.css and templates/vehicledata.html
  5. Run app.py and check the app at localhost:5000
  # We can train the model also through app by just clicking "train the model" button on the app.
+
+ ---------------------------------------------------- CI/CD --------------------------------------------------------
+ 1. Setup the Dockerfile and .dockerignore file.
+ 2. Create a directory .github/workflows and add aws.yaml file inside it.
+ # Through githu actions, we perform CI/CD. aws.yaml defines steps to do it.
+ 3. If already not created a AWS console IAM user, then create one. Since we have already created, we would refer those credentials now.
+ # Refer above steps to create a new IAM user if not created already.
+ 4. Create a repository in ECR: Go to ECR --> "create repository" --> give a name to repo (lets say vehicleproj) and then click on "create"
+ # Copy the repo name and URI and save it for later use.
+ 5. Now we will create a Ubuntu server on EC2. 
+ # Unlike the previous project, where Github Actions' server was performing the CI, here we would be doing CD on our self hosted server (as mentioned in aws.yaml) created on EC2.
+    a. AWS console >> EC2 >> Launch Instance >> name: vehicledata-machine
+        >> Image: Ubuntu >> AMI: Ubuntu Server 24.04 (free tier) >> Instance: T2 Medium (~chargeable-3.5rs/hr)
+        >> create new key pair (name: proj1key) >> allow for https and http traffic >> storage: 30gb >> Launch
+        >> Go to instance >> click on "Connect" >> Connect using EC2 Instance Connect 
+        >> Connect (Terminal will be launched) 
+6. In the newly opened EC2, Install docker in EC2 Machine:
+      ## Optinal commands to run
+      sudo apt-get update -y
+      sudo apt-get upgrade
+      ## Required (Because Docker is'nt there in our EC2 server - [docker --version])
+      curl -fsSL https://get.docker.com -o get-docker.sh
+      sudo sh get-docker.sh
+      sudo usermod -aG docker ubuntu
+      newgrp docker
+7. Next step is to connect Github with EC2(Self hosted runner):
+      * select your project on Github >> go to settings >> Actions >> Runner >> New self hosted runner
+        >> Select OS (Linux) >> Now step by step run all "Download" related commands on EC2 server 
+        >> run first "Configure" command (hit enter instead of setting a "runner group", then runner name: self-hosted)
+        >> For "enter any additional label", hit enter to skip >> For "name of work folder", again hit enter
+        >> Now run second "Configure" command (./run.sh) and runner will get connected to Github
+        >> To crosscheck, go back to Github projetc and click on settings/actions/Runner and you will see runner state as "idle"
+        >> If you do ctrl+c on EC2 server then runner will shut then restart with "./run.sh"
+8. Setup your Github secrets: (Github project>Settings>SecretandVariable>Actions>NewRepoSecret)
+      AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY
+      AWS_DEFAULT_REGION
+      ECR_REPO
+    # If we want to add the option of model training too, we woul have to give mongodb url too as secret key.
+9. CI-CD pipeline will be triggered at next commit and push so add, commit and push the updates to github.
+
